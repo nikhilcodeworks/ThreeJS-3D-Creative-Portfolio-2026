@@ -139,7 +139,6 @@ export default function About() {
               { label: "Location", value: personalInfo.location },
               { label: "Email", value: personalInfo.email },
               { label: "University", value: "DCRUST Murthal" },
-              { label: "Studio", value: personalInfo.studio },
               { label: "Availability", value: "Open · 2026" },
               { label: "GitHub", value: "nikhilcodeworks" },
             ].map(({ label, value }) => (

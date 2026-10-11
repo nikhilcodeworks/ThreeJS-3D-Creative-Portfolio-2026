@@ -10,13 +10,11 @@ export const personalInfo = {
   email: "nikhilcode.io@gmail.com",
   github: "https://github.com/nikhilcodeworks",
   linkedin: "https://www.linkedin.com/in/nikhilcodes01/",
-  studio: "THE RU3X",
-  studioUrl: "#",
   availability: "Open to Opportunities · 2026",
   bio: "I build scalable full-stack applications and craft immersive digital experiences where clean engineering meets thoughtful design.",
   bioExtended: [
     "I'm a Full Stack Developer with a passion for building products that are both technically solid and visually refined. From REST APIs and database design to smooth frontend interactions — I care about the full picture.",
-    "My work spans MERN-stack applications, AI-integrated tools, real-time systems, and client-facing websites. I founded THE RU3X, an AI automation studio, and continue to ship production-grade software.",
+    "My work spans MERN-stack applications, AI-integrated tools, real-time systems, and client-facing websites, and I continue to ship production-grade software.",
     "I'm drawn to projects where technical complexity meets meaningful UX — where the backend architecture and the frontend experience are equally considered.",
   ],
   education: {
