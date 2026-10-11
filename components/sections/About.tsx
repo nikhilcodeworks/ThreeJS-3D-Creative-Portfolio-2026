@@ -1,12 +1,35 @@
 "use client";
 import { useRef } from "react";
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { personalInfo } from "@/lib/data";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// 3D glass cube — heavy WebGL scene, loads client-side only.
+const GlassCube = dynamic(() => import("@/components/3d/GlassCube"), {
+  ssr: false,
+  loading: () => (
+    <div
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        display: "grid",
+        placeItems: "center",
+        color: "var(--color-text-tertiary)",
+        fontFamily: "var(--font-mono)",
+        fontSize: "0.625rem",
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+      }}
+    >
+      Loading 3D Cube...
+    </div>
+  ),
+});
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -51,23 +74,8 @@ export default function About() {
         {/* Portrait */}
         <div>
           <div className="about-portrait">
-            <Image
-              src="/portrait.webp"
-              alt="Nikhil — Full Stack Developer & Creative Engineer"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 400px"
-              style={{ objectFit: "cover" }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 40%)",
-                pointerEvents: "none",
-              }}
-            />
-            <div className="about-portrait-label" style={{ color: "#ffffff", zIndex: 2, fontWeight: 500 }}>
+            <GlassCube />
+            <div className="about-portrait-label" style={{ zIndex: 2, fontWeight: 500 }}>
               Nikhil — Delhi NCR, India — 2026
             </div>
           </div>
