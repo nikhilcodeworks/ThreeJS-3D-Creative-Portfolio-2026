@@ -32,7 +32,7 @@ export const projects = [
   {
     slug: "internship-portal",
     num: "01",
-    title: "PORTAL",
+    title: "INTERNSHIP PORTAL",
     fullTitle: "Internship Portal",
     category: "Full Stack · MERN · Auth Systems",
     tags: ["React.js", "Node.js", "MongoDB", "JWT", "OAuth2"],

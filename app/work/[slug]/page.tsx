@@ -380,9 +380,11 @@ export default function CaseStudyPage({
                     cursor: "none",
                   }}
                   onMouseEnter={(e) =>
-                    ((e.currentTarget.style.color = "var(--color-accent)"))}
+                    ((e.currentTarget.style.color =
+                      "var(--color-interactive-strong)"))}
                   onMouseLeave={(e) =>
-                    ((e.currentTarget.style.color = "var(--color-text-primary)"))}
+                    ((e.currentTarget.style.color =
+                      "var(--color-text-primary)"))}
                 >
                   {next.title} →
                 </h2>

@@ -33,7 +33,7 @@
 
 ## ✨ Key Features
 
-- 🪐 **Interactive WebGL 3D Hero Scene**: Orbiting Earth globe, particle clouds, dynamic lighting, and camera parallax responsive to mouse movement.
+- 🪐 **Interactive WebGL 3D Hero Scene**: Glowing interactive energy orb with procedural GLSL shaders, particle-free lighting, and camera parallax responsive to mouse movement.
 - 🌊 **Ultra-Smooth Inertial Scroll**: Powered by `@studio-freight/lenis` for consistent cinematic page scrolling across all platforms.
 - 🎭 **GSAP Micro-Interactions**: Complex scroll-triggered reveals, character split-text animations (`split-type`), and staggered entrance choreographies.
 - 🎯 **Magnetic Custom Cursor**: Dynamic fluid cursor tracking mouse position with contextual hover enlargement and magnetic button snapping.
@@ -64,7 +64,7 @@ ThreeJS-3D-Creative-Portfolio-2026/
 │   └── globals.css            # Custom CSS & Tailwind styles
 ├── components/
 │   ├── 3d/
-│   │   └── HeroScene.tsx      # R3F WebGL Canvas & 3D Earth shader
+│   │   └── HeroScene.tsx      # R3F WebGL Canvas & GLSL energy orb
 │   ├── sections/              # Hero, About, Work, Skills, Experience, Contact
 │   └── ui/                    # CustomCursor, Loader, Marquee, Navbar, Footer
 ├── lib/
