@@ -9,7 +9,7 @@ export const personalInfo = {
   location: "Delhi NCR, India",
   email: "nikhilcode.io@gmail.com",
   github: "https://github.com/nikhilcodeworks",
-  linkedin: "https://www.linkedin.com/in/nikhilcodes01/",
+  linkedin: "https://www.linkedin.com/in/nikhilcodeio/",
   availability: "Open to Opportunities · 2026",
   bio: "I build scalable full-stack applications and craft immersive digital experiences where clean engineering meets thoughtful design.",
   bioExtended: [

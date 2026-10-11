@@ -61,7 +61,7 @@ export default function Contact() {
           {[
             { label: "Email", href: `mailto:${personalInfo.email}`, text: personalInfo.email },
             { label: "GitHub", href: personalInfo.github, text: "nikhilcodeworks" },
-            { label: "LinkedIn", href: personalInfo.linkedin, text: "nikhilcodes01" },
+            { label: "LinkedIn", href: personalInfo.linkedin, text: "nikhilcodeio" },
           ].map(({ label, href, text }) => (
             <a
               key={label}
