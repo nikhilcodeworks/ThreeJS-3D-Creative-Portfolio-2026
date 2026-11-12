@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { experience } from "@/lib/data";
+import { experience, education } from "@/lib/data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,16 +14,22 @@ export default function Experience() {
     () => {
       const items = sectionRef.current?.querySelectorAll(".timeline-item") ?? [];
       items.forEach((item) => {
-        gsap.from(item, {
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 85%",
-          },
-        });
+        gsap.fromTo(
+          item,
+          { y: 35, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 88%",
+              toggleActions: "play none none none",
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       });
     },
     { scope: sectionRef }
@@ -33,13 +39,12 @@ export default function Experience() {
     <section
       ref={sectionRef}
       id="experience"
-      className="section"
-      style={{ padding: "8rem 2.5rem", maxWidth: "none" }}
+      className="section experience-section"
       aria-label="Work experience"
     >
       <div style={{ maxWidth: 1400, margin: "0 auto" }}>
         {/* Header */}
-        <div style={{ marginBottom: "4rem" }}>
+        <div style={{ marginBottom: "3.5rem" }}>
           <span className="section-num">// 05</span>
           <h2
             className="text-display-lg"
@@ -59,32 +64,36 @@ export default function Experience() {
               aria-label={`${item.role} at ${item.company}`}
             >
               {/* Left: Year */}
-              <div className="timeline-year" aria-label={`Period: ${item.year}`}>
+              <div className="timeline-date timeline-year" aria-label={`Period: ${item.year}`}>
                 {item.year}
               </div>
 
               {/* Right: Details */}
-              <div>
+              <div className="timeline-content">
                 <h3 className="timeline-role">{item.role}</h3>
-                <p className="timeline-company">{item.company}</p>
+                <p className="timeline-company">
+                  {item.company} {item.location ? `· ${item.location}` : ""}
+                </p>
                 <p className="timeline-desc">{item.description}</p>
 
                 {/* Tech stack tags */}
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: "0.5rem",
-                    marginTop: "1.25rem",
-                  }}
-                  aria-label="Technologies used"
-                >
-                  {item.tech.map((t) => (
-                    <span key={t} className="project-tag">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+                {item.tech && item.tech.length > 0 && (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "0.5rem",
+                      marginTop: "1.25rem",
+                    }}
+                    aria-label="Technologies used"
+                  >
+                    {item.tech.map((t) => (
+                      <span key={t} className="project-tag">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </article>
           ))}
@@ -92,26 +101,23 @@ export default function Experience() {
 
         {/* Education append */}
         <div
+          className="timeline-item timeline-education"
           style={{
-            marginTop: "4rem",
-            paddingTop: "4rem",
+            marginTop: "3.5rem",
+            paddingTop: "3.5rem",
             borderTop: "1px solid var(--color-border)",
-            display: "grid",
-            gridTemplateColumns: "160px 1fr",
-            gap: "3rem",
           }}
+          role="article"
+          aria-label={`Education: ${education.degree}`}
         >
-          <div className="timeline-year">2020 — 2024</div>
-          <div>
-            <h3 className="timeline-role">B.Tech in CS&amp;E</h3>
+          <div className="timeline-date timeline-year">{education.period}</div>
+          <div className="timeline-content">
+            <h3 className="timeline-role">{education.degree}</h3>
             <p className="timeline-company">
-              Deenbandhu Chhotu Ram University (DCRUST) · Murthal, Haryana
+              {education.institution} · {education.location}
             </p>
             <p className="timeline-desc">
-              Computer Science &amp; Engineering. CGPA: 7.6/10.0. Gained
-              foundation in data structures, algorithms, databases, and web
-              development. Built multiple production-level projects during
-              internships.
+              CGPA: {education.cgpa}. {education.desc || "Gained strong foundation in computer science and full-stack engineering."}
             </p>
           </div>
         </div>

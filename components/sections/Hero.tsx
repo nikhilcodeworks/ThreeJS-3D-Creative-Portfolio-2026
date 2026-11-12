@@ -43,20 +43,36 @@ export default function Hero() {
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from(eyebrowRef.current, { y: 20, opacity: 0, duration: 0.8 }, 0.2)
-        .from(
+      tl.fromTo(
+        eyebrowRef.current,
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7 },
+        0.1
+      )
+        .fromTo(
           titleRef.current?.querySelectorAll(".line-wrap") ?? [],
-          { y: "110%", duration: 1, stagger: 0.08 },
-          0.4
+          { y: "100%", opacity: 0 },
+          { y: "0%", opacity: 1, duration: 0.8, stagger: 0.08 },
+          0.3
         )
-        .from(subtitleRef.current, { y: 20, opacity: 0, duration: 0.8 }, 0.8)
-        .from(statusRef.current, { y: 10, opacity: 0, duration: 0.6 }, 1.0)
-        .from(ctaRef.current?.children ?? [], {
-          y: 20,
-          opacity: 0,
-          stagger: 0.1,
-          duration: 0.7,
-        }, 1.1);
+        .fromTo(
+          subtitleRef.current,
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 },
+          0.6
+        )
+        .fromTo(
+          statusRef.current,
+          { y: 10, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5 },
+          0.8
+        )
+        .fromTo(
+          ctaRef.current?.children ?? [],
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.08, duration: 0.6 },
+          0.9
+        );
     },
     { scope: heroRef }
   );

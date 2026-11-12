@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,29 +18,23 @@ export default function Skills() {
 
   useGSAP(
     () => {
-      gsap.from(".skill-category", {
-        y: 40,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-      });
-
-      gsap.from(".skill-item", {
-        x: -20,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.05,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".skill-list",
-          start: "top 80%",
-        },
-      });
+      gsap.fromTo(
+        ".skill-category",
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+            invalidateOnRefresh: true,
+          },
+        }
+      );
     },
     { scope: sectionRef }
   );
@@ -54,13 +48,14 @@ export default function Skills() {
     >
       {/* Header */}
       <div
+        className="skills-header-row"
         style={{
           maxWidth: 1400,
-          margin: "0 auto 4rem",
+          margin: "0 auto 3.5rem",
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "space-between",
-          gap: "2rem",
+          gap: "1.5rem",
         }}
       >
         <div>
@@ -79,15 +74,17 @@ export default function Skills() {
 
         {/* Terminal-style badge */}
         <div
+          className="skills-terminal-badge"
           style={{
             fontFamily: "var(--font-mono)",
-            fontSize: "0.625rem",
+            fontSize: "0.6875rem",
             letterSpacing: "0.1em",
             color: "var(--color-accent)",
             border: "1px solid var(--color-accent-dim)",
             padding: "0.5rem 1rem",
-            borderRadius: "2px",
+            borderRadius: "4px",
             whiteSpace: "nowrap",
+            background: "rgba(37, 99, 235, 0.04)",
           }}
           aria-hidden="true"
         >
@@ -103,7 +100,7 @@ export default function Skills() {
               {prefix} — {label}
             </div>
             <ul className="skill-list" aria-label={`${label} skills`}>
-              {skills[key].map((skill) => (
+              {(skills[key] || []).map((skill) => (
                 <li key={skill} className="skill-item">
                   <span>{skill}</span>
                   <span className="skill-dot" aria-hidden="true" />
@@ -114,15 +111,17 @@ export default function Skills() {
         ))}
       </div>
 
-      {/* Bottom code hint */}
+      {/* Bottom stats row */}
       <div
+        className="skills-stats-row"
         style={{
           maxWidth: 1400,
-          margin: "4rem auto 0",
-          padding: "2rem 3rem",
+          margin: "3.5rem auto 0",
+          padding: "2rem 2.5rem",
           borderTop: "1px solid var(--color-border)",
           display: "flex",
-          gap: "3rem",
+          justifyContent: "space-between",
+          gap: "2rem",
           flexWrap: "wrap",
         }}
         aria-hidden="true"
@@ -133,7 +132,7 @@ export default function Skills() {
           ["Lines of Code", "∞"],
           ["Clients Served", "5+"],
         ].map(([label, value]) => (
-          <div key={label}>
+          <div key={label} className="skills-stat-box">
             <div className="fact-label">{label}</div>
             <div
               style={{
@@ -142,6 +141,7 @@ export default function Skills() {
                 fontWeight: 800,
                 color: "var(--color-text-primary)",
                 letterSpacing: "-0.02em",
+                marginTop: "0.25rem",
               }}
             >
               {value}

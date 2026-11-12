@@ -38,8 +38,28 @@ export default function HomePage() {
     // Refresh ScrollTrigger after loader exits
     setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 200);
+    }, 150);
   };
+
+  useEffect(() => {
+    if (!loading) {
+      const refresh = () => ScrollTrigger.refresh();
+      const t1 = setTimeout(refresh, 150);
+      const t2 = setTimeout(refresh, 600);
+      const t3 = setTimeout(refresh, 1200);
+
+      window.addEventListener("resize", refresh);
+      window.addEventListener("load", refresh);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+        window.removeEventListener("resize", refresh);
+        window.removeEventListener("load", refresh);
+      };
+    }
+  }, [loading]);
 
   return (
     <>
