@@ -105,9 +105,6 @@ export default function HomePage() {
           {/* 07 — Principles */}
           <Principles />
 
-          {/* Second marquee */}
-          <Marquee />
-
           {/* 08 — Contact */}
           <Contact />
         </main>

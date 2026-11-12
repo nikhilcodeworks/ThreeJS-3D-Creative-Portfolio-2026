@@ -616,35 +616,47 @@ button:focus-visible,
 }
 
 /* ─── Marquee ─── */
+/* ─── Marquee ─── */
 .marquee-section {
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
-  padding: 1.25rem 0;
+  padding: 0.85rem 0;
   overflow: hidden;
-  background: #f7f7f7;
+  background: #fbfbfb;
+  position: relative;
+  z-index: 10;
+  width: 100%;
 }
 
 .marquee-track {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   white-space: nowrap;
-  animation: marquee 28s linear infinite;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+  will-change: transform;
 }
 
 .marquee-track:hover { animation-play-state: paused; }
 
 .marquee-item {
-  font-family: var(--font-display);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
-.marquee-item span.accent { color: #0a0a0a; }
+.marquee-item span.accent {
+  color: #3b82f6;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
 
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -1811,6 +1823,50 @@ button:focus-visible,
 
 /* Mobile (≤768px) */
 @media (max-width: 768px) {
+  /* Hero flex */
+  .hero {
+    display: flex !important;
+  }
+
+  /* Work header mobile alignment & tight gaps */
+  .work-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    margin-bottom: 1.5rem !important;
+    text-align: left !important;
+  }
+  .work-header-right {
+    text-align: left !important;
+    max-width: 100% !important;
+  }
+  .work-section {
+    padding: 2.25rem 1.25rem 3rem !important;
+  }
+  .ct_sticky_scroll_main {
+    row-gap: 1.5rem !important;
+  }
+
+  /* Marquee mobile sizing */
+  .marquee-section {
+    padding: 0.7rem 0 !important;
+    margin: 1rem 0 !important;
+  }
+  .marquee-item {
+    font-size: 0.72rem !important;
+    gap: 1.5rem !important;
+    letter-spacing: 0.1em !important;
+  }
+  .marquee-track {
+    gap: 1.5rem !important;
+    animation-duration: 25s !important;
+  }
+
+  /* Contact section mobile */
+  .contact-section {
+    padding: 2.75rem 1.25rem 2rem !important;
+    min-height: auto !important;
+  }
   /* General sections - eliminate excessive blank spaces */
   .section,
   .about-section,
@@ -1997,3 +2053,5 @@ button:focus-visible,
 .skill-item {
   opacity: 1;
 }
+
+.contact-anim { opacity: 1; }

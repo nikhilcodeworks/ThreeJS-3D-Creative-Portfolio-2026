@@ -13,17 +13,23 @@ export default function Contact() {
   useGSAP(
     () => {
       const items = sectionRef.current?.querySelectorAll(".contact-anim") ?? [];
-      gsap.from(items, {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-      });
+      gsap.fromTo(
+        items,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 88%",
+            toggleActions: "play none none none",
+            invalidateOnRefresh: true,
+          },
+        }
+      );
     },
     { scope: sectionRef }
   );
@@ -37,7 +43,7 @@ export default function Contact() {
     >
       <div className="contact-inner">
         {/* Section label */}
-        <span className="section-num contact-anim" style={{ display: "block", marginBottom: "2rem" }}>
+        <span className="section-num contact-anim" style={{ display: "block", marginBottom: "1.5rem" }}>
           // 08 — Contact
         </span>
 
@@ -74,7 +80,7 @@ export default function Contact() {
               <span
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: "0.5625rem",
+                  fontSize: "0.625rem",
                   color: "var(--color-text-tertiary)",
                   letterSpacing: "0.1em",
                 }}
@@ -103,11 +109,11 @@ export default function Contact() {
           className="contact-anim"
           style={{
             fontFamily: "var(--font-mono)",
-            fontSize: "0.625rem",
+            fontSize: "0.6875rem",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
             color: "var(--color-text-tertiary)",
-            marginTop: "3rem",
+            marginTop: "2.5rem",
           }}
         >
           Based in {personalInfo.location} · Available Worldwide (Remote)

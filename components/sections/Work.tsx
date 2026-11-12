@@ -91,7 +91,7 @@ export default function Work() {
             Selected Work
           </h2>
         </div>
-        <div style={{ textAlign: "right", maxWidth: 360 }}>
+        <div className="work-header-right" style={{ maxWidth: 360 }}>
           <p
             style={{
               fontFamily: "var(--font-body)",
