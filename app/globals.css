@@ -3,6 +3,29 @@
 
 @import "tailwindcss";
 
+/* ─── Custom Typography for Cards (from creative animation) ─── */
+@font-face {
+  font-family: 'delight-regular';
+  src: url('/fonts/delight-regular.157bawnxu4w0b.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'delight-medium';
+  src: url('/fonts/delight-medium.1qwejfu8jjr_z.otf') format('opentype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi-Regular';
+  src: url('/fonts/Satoshi-Regular.2wmu-pv6lem14.woff') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi-Medium';
+  src: url('/fonts/Satoshi-Medium.2svgwwr10pwz5.woff') format('woff');
+  font-display: swap;
+}
+
+
 /* ─── Design Tokens — Black & White ─── */
 :root {
   /* Colors — Pure B&W */
@@ -64,13 +87,13 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   scroll-behavior: auto;
 }
 
 body {
   background-color: var(--color-bg);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ─── Scrollbar ─── */
@@ -174,6 +197,30 @@ button:focus-visible,
   pointer-events: none;
   z-index: var(--z-cursor);
   transition: opacity 0.3s, background 0.2s, box-shadow 0.2s;
+}
+
+/* ─── Hide custom cursor on mobile & tablet ─── */
+@media (hover: none), (pointer: coarse), (max-width: 1023px) {
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-label,
+  .cursor-trail {
+    display: none !important;
+  }
+
+  /* Restore default cursor for interactive elements on touch devices */
+  *,
+  .btn-primary,
+  .btn-outline,
+  .project-row,
+  a,
+  button {
+    cursor: auto !important;
+  }
+
+  a, button, [role="button"] {
+    cursor: pointer !important;
+  }
 }
 
 .cursor-dot.cursor-blue {
@@ -725,6 +772,8 @@ button:focus-visible,
 
 /* ─── About ─── */
 .about-section {
+  position: relative;
+  z-index: 20;
   padding: 7rem 2.5rem;
   background: #f9f9f9;
   border-top: 1px solid var(--color-border);
@@ -1358,4 +1407,389 @@ button:focus-visible,
 }
 .code-line:hover {
   background: var(--color-interactive-bg);
+}
+
+
+/* ─── Sticky Sliding Card Stack (Creative Thoughts Effect) ─── */
+.work-section {
+  padding: 6rem 2.5rem 12rem;
+  background: #ffffff;
+  position: relative;
+  overflow: visible !important;
+}
+
+.ct_sticky_scroll_main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5rem;
+  position: relative;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  overflow: visible !important;
+}
+
+.cti_saas_card {
+  position: sticky;
+  top: var(--stick-top, 96px);
+  z-index: var(--stick-z, 1);
+  background: var(--card-bg, #ffffff);
+  border-radius: 32px;
+  display: grid;
+  grid-template-columns: minmax(320px, 1.15fr) 1.25fr;
+  align-items: stretch;
+  gap: 3rem;
+  width: 100%;
+  overflow: hidden;
+  border: 1.5px solid var(--card-border, rgba(0, 0, 0, 0.08));
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+  min-height: 520px;
+  will-change: top;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.cti_saas_card:hover {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Card Theme Variations */
+.cti_saas_card.is_blue {
+  --card-bg: linear-gradient(135deg, #eef2ff 0%, #dfe7fe 100%);
+  --card-border: rgba(93, 92, 255, 0.28);
+  --theme-btn-bg: #4f46e5;
+  --theme-btn-hover: #4338ca;
+  --theme-badge-bg: rgba(93, 92, 255, 0.14);
+  --theme-badge-color: #3730a3;
+  --theme-accent: #4f46e5;
+  --theme-glow: rgba(93, 92, 255, 0.2);
+}
+
+.cti_saas_card.is_skin {
+  --card-bg: linear-gradient(135deg, #fff1f0 0%, #fedcd7 100%);
+  --card-border: rgba(255, 95, 76, 0.28);
+  --theme-btn-bg: #ea580c;
+  --theme-btn-hover: #c2410c;
+  --theme-badge-bg: rgba(255, 95, 76, 0.14);
+  --theme-badge-color: #9a3412;
+  --theme-accent: #ea580c;
+  --theme-glow: rgba(255, 95, 76, 0.2);
+}
+
+.cti_saas_card.is_sky {
+  --card-bg: linear-gradient(135deg, #f0fdfa 0%, #cbf5fb 100%);
+  --card-border: rgba(8, 210, 238, 0.32);
+  --theme-btn-bg: #0284c7;
+  --theme-btn-hover: #0369a1;
+  --theme-badge-bg: rgba(8, 210, 238, 0.16);
+  --theme-badge-color: #0e7490;
+  --theme-accent: #0284c7;
+  --theme-glow: rgba(8, 210, 238, 0.25);
+}
+
+.cti_saas_card.is_green {
+  --card-bg: linear-gradient(135deg, #f0fdf4 0%, #cbf9e2 100%);
+  --card-border: rgba(0, 179, 85, 0.28);
+  --theme-btn-bg: #059669;
+  --theme-btn-hover: #047857;
+  --theme-badge-bg: rgba(0, 179, 85, 0.14);
+  --theme-badge-color: #166534;
+  --theme-accent: #059669;
+  --theme-glow: rgba(0, 179, 85, 0.2);
+}
+
+/* Card Content (Left Column) */
+.cti_content {
+  flex: 1;
+  width: 100%;
+  padding: 42px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header bar visible when cards are stacked */
+.cti_card_header_bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cti_card_num {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--theme-accent);
+}
+
+.cti_badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background-color: var(--theme-badge-bg);
+  color: var(--theme-badge-color);
+  font-family: 'Satoshi-Medium', sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.cti_badge_dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--theme-accent);
+  box-shadow: 0 0 8px var(--theme-glow);
+}
+
+.cti_card_year {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8125rem;
+  color: #6b7280;
+}
+
+.cti_heading {
+  color: #0f172a;
+  font-family: 'delight-medium', 'Satoshi-Medium', sans-serif;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.cti_desc {
+  color: #374151;
+  font-size: 0.96rem;
+  line-height: 1.62;
+  font-family: 'Satoshi-Regular', sans-serif;
+  margin-bottom: 22px;
+  max-width: 520px;
+}
+
+/* Stats Highlights */
+.cti_stats_wrapper {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.cti_stat_box {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 10px 16px;
+  min-width: 140px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.cti_stat_box h4 {
+  font-family: 'delight-medium', 'Satoshi-Medium', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cti_stat_box p {
+  font-family: 'Satoshi-Regular', sans-serif;
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* Tech Pills */
+.cti_tech_tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.cti_tech_pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: #334155;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* Actions Row */
+.cti_actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.cti_build_btn {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff !important;
+  background-color: var(--theme-btn-bg);
+  border: 1px solid var(--theme-btn-bg);
+  border-radius: 12px;
+  padding: 10px 22px;
+  font-family: 'Satoshi-Medium', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.cti_build_btn:hover {
+  background-color: var(--theme-btn-hover);
+  border-color: var(--theme-btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
+.cti_build_btn svg {
+  transition: transform 0.25s ease;
+}
+
+.cti_build_btn:hover svg {
+  transform: translateX(4px);
+}
+
+.cti_github_btn {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #334155;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-family: 'Satoshi-Medium', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.cti_github_btn:hover {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Card Image (Right Column) */
+.ct_sass_card_img {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 24px 32px 24px 0;
+}
+
+.ct_card_img_wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.cti_saas_card:hover .ct_card_img_wrapper {
+  transform: scale(1.03) translateY(-3px);
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.16), 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.ct_sass_card_img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.cti_saas_card:hover .ct_sass_card_img img {
+  transform: scale(1.02);
+}
+
+/* Responsive Media Queries */
+@media screen and (max-width: 1024px) {
+  .cti_saas_card {
+    grid-template-columns: 1fr;
+    grid-row-gap: 20px;
+    padding-bottom: 24px;
+    min-height: auto;
+  }
+  .cti_content {
+    padding: 32px 32px 10px;
+  }
+  .ct_sass_card_img {
+    padding: 0 32px 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .work-section {
+    padding: 4rem 1.25rem 6rem;
+  }
+  .ct_sticky_scroll_main {
+    row-gap: 2rem;
+  }
+  .cti_saas_card {
+    border-radius: 22px;
+  }
+  .cti_content {
+    padding: 24px 20px 8px;
+  }
+  .ct_sass_card_img {
+    padding: 0 20px 16px;
+  }
+  .cti_heading {
+    font-size: 1.65rem;
+  }
+  .cti_stats_wrapper {
+    gap: 10px;
+  }
+  .cti_stat_box {
+    min-width: 110px;
+    padding: 8px 12px;
+  }
+  .cti_stat_box h4 {
+    font-size: 1.1rem;
+  }
+}
+
+/* ─── Layering for Sections Below Sticky Stacks ─── */
+.about-section,
+.skills-section,
+.code-section,
+.contact-section,
+.section {
+  position: relative;
+  z-index: 20;
 }

@@ -55,8 +55,20 @@ export default function CustomCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    // Skip entirely on touch devices (no hover cursor there).
-    if (window.matchMedia("(hover: none)").matches) return;
+    // Skip entirely on touch/mobile devices (no hover cursor there).
+    const isTouchDevice =
+      window.matchMedia("(hover: none)").matches ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth < 1024;
+
+    if (isTouchDevice) {
+      // Hide all cursor elements on touch/tablet/mobile
+      if (dotRef.current) dotRef.current.style.display = "none";
+      if (ringRef.current) ringRef.current.style.display = "none";
+      if (labelRef.current) labelRef.current.style.display = "none";
+      if (canvasRef.current) canvasRef.current.style.display = "none";
+      return;
+    }
 
     const dot = dotRef.current!;
     const ring = ringRef.current!;
