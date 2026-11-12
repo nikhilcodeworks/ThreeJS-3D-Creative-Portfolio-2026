@@ -1254,7 +1254,9 @@ button:focus-visible,
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-  .marquee-track { animation: none; }
+  .marquee-track {
+    animation: marquee 50s linear infinite !important;
+  }
 }
 
 /* ─── Responsive ─── */
@@ -1845,6 +1847,14 @@ button:focus-visible,
   }
   .ct_sticky_scroll_main {
     row-gap: 1.5rem !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  .cti_saas_card {
+    position: relative !important;
+    top: auto !important;
+    min-height: auto !important;
+    margin-bottom: 1.5rem !important;
   }
 
   /* Marquee mobile sizing */

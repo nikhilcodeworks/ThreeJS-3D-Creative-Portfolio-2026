@@ -21,6 +21,18 @@ export default function Work() {
       const cards = containerRef.current.querySelectorAll<HTMLElement>(".cti_saas_card");
       if (!cards.length) return;
 
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      if (isMobile) {
+        cards.forEach((card) => {
+          card.style.removeProperty("--stick-top");
+          card.style.position = "relative";
+          card.style.top = "auto";
+          card.style.zIndex = "1";
+        });
+        ScrollTrigger.refresh();
+        return;
+      }
+
       const isDesktop = window.matchMedia("(min-width: 992px)").matches;
       const isTablet = window.matchMedia("(min-width: 768px) and (max-width: 991px)").matches;
 
